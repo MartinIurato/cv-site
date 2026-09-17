@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Martín Iurato</title>
+<style>
+/* CV y casos de estudio para pantalla (sitio público). A diferencia del CSS de un template, que es
+   para xhtml2pdf e impresión en A4, este es para navegador: ancho fluido con un máximo de lectura,
+   legible en celular, sin fuentes externas.
+
+   Los colores son los mismos del CV impreso: las custom properties se alimentan de la paleta de
+   templates/classic/template.yml, que el build pasa al renderizar esta hoja con Jinja. Así el sitio
+   y el PDF no divergen. */
+
+:root {
+  --name: #164E63;
+  --accent: #176B75;
+  --text: #242B33;
+  --strong: #242B33;
+  --muted: #52606D;
+  --light: #52606D;
+  --rule: #CBD5DC;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0 auto;
+  max-width: 50rem;
+  padding: 2.5rem 1.25rem 3.5rem;
+  background: #ffffff;
+  color: var(--text);
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-size: 1rem;
+  line-height: 1.55;
+}
+
+p {
+  margin: 0;
+}
+
+a {
+  color: var(--accent);
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
+}
+
+h1 {
+  margin: 0 0 0.25rem;
+  color: var(--name);
+  font-size: 2.1rem;
+  line-height: 1.2;
+}
+
+h2 {
+  margin: 2.25rem 0 0.75rem;
+  padding-bottom: 0.3rem;
+  /* Mismo gris de líneas que el CV impreso. */
+  border-bottom: 1px solid var(--rule);
+  color: var(--accent);
+  font-size: 1rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+h3 {
+  margin: 1rem 0 0.4rem;
+  color: var(--accent);
+  font-size: 1rem;
+}
+
+.headline {
+  color: var(--strong);
+  font-size: 1.15rem;
+  font-weight: 700;
+}
+
+.focus {
+  color: var(--muted);
+}
+
+.contact {
+  margin-top: 0.2rem;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+.contact a {
+  color: var(--muted);
+}
+
+.downloads {
+  margin-top: 0.9rem;
+  font-size: 0.95rem;
+}
+
+.summary {
+  margin-bottom: 0.6rem;
+}
+
+.expertise {
+  margin-bottom: 0.35rem;
+}
+
+.expertise-label,
+.technologies-label,
+.training-title {
+  color: var(--strong);
+  font-weight: 700;
+}
+
+/* Línea de cargo y fechas: la plantilla es la misma que la del PDF y usa una tabla de dos celdas. */
+
+.entry-head {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.entry-head td {
+  padding: 0;
+  vertical-align: baseline;
+}
+
+.entry-dates {
+  padding-left: 1rem;
+  color: var(--light);
+  font-size: 0.9rem;
+  text-align: right;
+  white-space: nowrap;
+}
+
+.position-head {
+  margin-top: 1.5rem;
+}
+
+.role,
+.compact-role {
+  color: var(--strong);
+  font-weight: 700;
+}
+
+.role {
+  font-size: 1.05rem;
+}
+
+.company,
+.compact-company,
+.training-detail {
+  color: var(--muted);
+  font-weight: 400;
+}
+
+.context {
+  margin-top: 0.4rem;
+}
+
+ul {
+  margin: 0.5rem 0 0;
+  padding-left: 1.25rem;
+}
+
+li {
+  margin-bottom: 0.4rem;
+}
+
+.bullet-links {
+  font-size: 0.9rem;
+  white-space: nowrap;
+}
+
+.technologies {
+  margin-top: 0.3rem;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.compact-role {
+  margin-top: 1rem;
+}
+
+.compact-detail .entry-main {
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+.training-entry {
+  margin-bottom: 0.3rem;
+}
+
+/* Casos de estudio */
+
+.case-nav {
+  margin-bottom: 1.5rem;
+  font-size: 0.95rem;
+}
+
+.case-position {
+  color: var(--muted);
+}
+
+.case-title {
+  margin-top: 0.3rem;
+  font-size: 1.5rem;
+}
+
+.case-body h2 {
+  margin-top: 2rem;
+}
+
+.case-body p,
+.case-body ul,
+.case-body ol {
+  margin: 0.6rem 0;
+}
+
+.case-body code {
+  font-size: 0.9em;
+}
+
+/* Celular: las fechas pasan debajo del cargo en lugar de a la derecha. */
+@media (max-width: 40rem) {
+  body {
+    padding-top: 1.5rem;
+  }
+
+  h1 {
+    font-size: 1.7rem;
+  }
+
+  .entry-head,
+  .entry-head tbody,
+  .entry-head tr,
+  .entry-head td {
+    display: block;
+    width: auto;
+  }
+
+  .entry-dates {
+    padding-left: 0;
+    text-align: left;
+  }
+
+  .bullet-links {
+    white-space: normal;
+  }
+}
+
+</style>
+</head>
+<body class="density-normal output-web">
+
+<h1>Martín Iurato</h1>
+<p class="headline">Especialista en Datos y Analytics</p>
+<p class="focus">Data Architecture · Analytics Engineering · SQL Server · Power BI</p>
+<p class="contact">Buenos Aires, Argentina &middot; martiniurato@gmail.com
+</p>
+<p class="contact"><a href="https://linkedin.com/in/martin-iurato">linkedin.com/in/martin-iurato</a> &middot; <a href="https://github.com/MartinIurato">github.com/MartinIurato</a>
+</p>
+
+<p class="downloads">Descargar: <a href="cv-base-es.pdf">CV completo en PDF</a> &middot; <a href="cv-short-es.pdf">CV de una página en PDF</a>
+</p>
+
+
+<h2>Perfil profesional</h2>
+
+<p class="summary">Profesional de tecnología y datos con trayectoria en desarrollo de software, sistemas empresariales, gestión de proyectos y arquitectura de datos.</p>
+
+<p class="summary">Foco en arquitectura de datos, calidad, trazabilidad y gobierno, con atención a que las soluciones no solo funcionen: que se entiendan, se puedan mantener y se presenten de forma clara para quien las usa.</p>
+
+
+<h2>Core Expertise</h2>
+
+<p class="expertise"><span class="expertise-label">Datos:</span> Data Warehousing · Modelado dimensional · SQL Server · T-SQL · ETL · Python · Calidad y conciliación de datos</p>
+
+<p class="expertise"><span class="expertise-label">Analytics:</span> Power BI · Microsoft Fabric · Modelo semántico · DAX · RLS · Dataflows</p>
+
+<p class="expertise"><span class="expertise-label">Gobierno técnico:</span> ADRs · GitHub · Versionado de esquemas · Trazabilidad de cambios</p>
+
+<p class="expertise"><span class="expertise-label">Gestión:</span> Coordinación de proveedores · Mercado de capitales</p>
+
+
+<h2>Experiencia</h2>
+
+
+<table class="entry-head position-head">
+  <tr>
+    <td class="entry-main"><span class="company">DA Valores &middot; Buenos Aires</span></td>
+    <td class="entry-dates">05/2025 – actualidad</td>
+  </tr>
+</table>
+<p class="role">Coordinador de TI · Data Architecture &amp; Analytics Engineering</p>
+<p class="context">Referente de IT, responsable de la evolución de la plataforma de datos y de las soluciones tecnológicas de la compañía, coordinando proveedores y equipos tercerizados en un entorno financiero regulado.</p>
+<ul>
+  
+  <li>Diseñé e implementé el Data Warehouse corporativo sobre SQL Server: capas, modelo en estrella y vistas que alimentan más de 40 reportes en Power BI.
+  </li>
+  
+  <li>Definí e implementé el gobierno técnico del área: ADRs, documentación como código, GitHub, versionado de esquemas, trazabilidad de cambios y estándares de arquitectura.
+  </li>
+  
+  <li>Construí y opero ETLs productivos en Python y SQL Server que integran información transaccional, administrativa y de mercado.
+  </li>
+  
+  <li>Rediseñé la arquitectura analítica hacia un modelo semántico centralizado en Power BI sobre Microsoft Fabric.
+  </li>
+  
+  <li>Diseñé e implementé una plataforma productiva de conciliación bilateral entre datos internos y de mercado.
+  </li>
+  
+  <li>Implementé mecanismos de historización de atributos que el sistema origen no conserva, utilizando vigencias para reconstruir correctamente relaciones y segmentaciones sobre períodos históricos ya cerrados.
+  </li>
+  
+  <li>Automaticé procesos operativos y de control.
+  </li>
+  
+  <li>Diseñé e implementé un sistema productivo de control de riesgo crediticio, con aplicación en C# y tablero de seguimiento en Power BI.
+  </li>
+  
+</ul>
+
+<p class="technologies"><span class="technologies-label">Tecnologías:</span> SQL Server, T-SQL, Power BI, Git, GitHub, Python, SQL Agent, DAX, Dataflows, Microsoft Fabric, C#</p>
+
+
+
+
+<table class="entry-head position-head">
+  <tr>
+    <td class="entry-main"><span class="company">L&#39;Oréal Argentina &middot; Buenos Aires</span></td>
+    <td class="entry-dates">10/2011 – 05/2025</td>
+  </tr>
+</table>
+<p class="role">Analista Funcional Sr.</p>
+<p class="context">Trayectoria en análisis funcional, gestión de proyectos, sistemas empresariales, Business Intelligence e integraciones en un entorno regional e internacional.</p>
+<ul>
+  
+  <li>Gestioné proyectos de sistemas empresariales, principalmente SAP y sistemas satélite, y de datos con Power BI.
+  </li>
+  
+  <li>Coordiné equipos y stakeholders de Argentina, Chile, Uruguay, México y Estados Unidos.
+  </li>
+  
+  <li>Participé en implementaciones e integraciones sobre SAP, SQL Server y Power BI.
+  </li>
+  
+  <li>Coordiné ciclos de testing, UAT, gestión de incidentes, troubleshooting y resolución de problemas productivos.
+  </li>
+  
+  <li>Participé en iniciativas de DRP, articulando negocio, equipos técnicos y proveedores.
+  </li>
+  
+</ul>
+
+<p class="technologies"><span class="technologies-label">Tecnologías:</span> SAP, Power BI, SQL Server</p>
+
+
+
+
+<table class="entry-head compact-head">
+  <tr>
+    <td class="entry-main"><span class="compact-company">Telecom Argentina (vía Pragma Consultores)</span><span class="compact-role"> &middot; SharePoint &amp; Project Server Developer</span></td>
+    <td class="entry-dates">01/2011 – 10/2011</td>
+  </tr>
+</table>
+<p class="compact-detail">Desarrollo y administración sobre SharePoint 2007 y Project Server 2007.</p>
+
+
+
+<table class="entry-head compact-head">
+  <tr>
+    <td class="entry-main"><span class="compact-company">Atento Argentina</span><span class="compact-role"> &middot; Desarrollador C# / SQL Server</span></td>
+    <td class="entry-dates">03/2009 – 01/2011</td>
+  </tr>
+</table>
+<p class="compact-detail">Desarrollo de aplicaciones con C#, ASP.NET, Visual Studio y SQL Server.</p>
+
+
+
+<table class="entry-head compact-head">
+  <tr>
+    <td class="entry-main"><span class="compact-company">Grupo Hasar</span><span class="compact-role"> &middot; Desarrollador C#</span></td>
+    <td class="entry-dates">08/2007 – 03/2009</td>
+  </tr>
+</table>
+<p class="compact-detail">Desarrollo de aplicaciones para Windows Mobile con C# y SQL Server.</p>
+
+
+
+<table class="entry-head compact-head">
+  <tr>
+    <td class="entry-main"><span class="compact-company">Tecnodata Sistemas Informáticos</span><span class="compact-role"> &middot; Soporte técnico</span></td>
+    <td class="entry-dates">05/2006 – 08/2007</td>
+  </tr>
+</table>
+<p class="compact-detail">Soporte, mantenimiento y resolución de problemas de infraestructura y estaciones de trabajo.</p>
+
+
+
+<h2>Formación</h2>
+<h3>Educación</h3>
+
+<table class="entry-head training-entry">
+  <tr>
+    <td class="entry-main"><span class="training-title">Técnico Superior en Programación</span><span class="training-detail"> &middot; Universidad Tecnológica Nacional (UTN)</span></td>
+    <td class="entry-dates">2003 – 2005</td>
+  </tr>
+</table>
+
+<h3>Formación complementaria</h3>
+
+<table class="entry-head training-entry">
+  <tr>
+    <td class="entry-main"><span class="training-title">Full Stack Python</span><span class="training-detail"> &middot; Ministerio de Educación de la Ciudad de Buenos Aires</span></td>
+    <td class="entry-dates">2022</td>
+  </tr>
+</table>
+
+<table class="entry-head training-entry">
+  <tr>
+    <td class="entry-main"><span class="training-title">Arquitectura de software: Diseño de sistemas de software esencial</span><span class="training-detail"> &middot; LinkedIn Learning</span></td>
+    <td class="entry-dates">03/2024</td>
+  </tr>
+</table>
+
+<table class="entry-head training-entry">
+  <tr>
+    <td class="entry-main"><span class="training-title">GitHub para programadores</span><span class="training-detail"> &middot; LinkedIn Learning</span></td>
+    <td class="entry-dates">03/2024</td>
+  </tr>
+</table>
+
+<table class="entry-head training-entry">
+  <tr>
+    <td class="entry-main"><span class="training-title">Aprende gobernanza de datos</span><span class="training-detail"> &middot; LinkedIn Learning</span></td>
+    <td class="entry-dates">07/2024</td>
+  </tr>
+</table>
+
+<table class="entry-head training-entry">
+  <tr>
+    <td class="entry-main"><span class="training-title">Fundamentos de la ingeniería de datos</span><span class="training-detail"> &middot; LinkedIn Learning</span></td>
+    <td class="entry-dates">07/2024</td>
+  </tr>
+</table>
+
+<table class="entry-head training-entry">
+  <tr>
+    <td class="entry-main"><span class="training-title">Python esencial</span><span class="training-detail"> &middot; LinkedIn Learning</span></td>
+    <td class="entry-dates">09/2024</td>
+  </tr>
+</table>
+
+<table class="entry-head training-entry">
+  <tr>
+    <td class="entry-main"><span class="training-title">Descubre las capacidades de Microsoft Power Apps</span><span class="training-detail"> &middot; LinkedIn Learning</span></td>
+    <td class="entry-dates">09/2024</td>
+  </tr>
+</table>
+
+
+
+<h2>Idiomas</h2>
+<p class="languages">Inglés (intermedio, B1)</p>
+
+
+</body>
+</html>
