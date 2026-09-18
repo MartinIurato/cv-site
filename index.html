@@ -136,6 +136,12 @@ h3 {
   margin-top: 1.5rem;
 }
 
+/* El primer compacto después de un puesto completo lleva el mismo aire que un puesto completo. Los
+   compactos que siguen a otro compacto quedan como están. */
+:is(ul, .technologies) + :is(.compact-one-line, .compact-head) {
+  margin-top: 1.5rem;
+}
+
 .company,
 .compact-company {
   color: var(--strong);
