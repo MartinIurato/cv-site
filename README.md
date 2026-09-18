@@ -3,29 +3,13 @@
 **Especialista en Datos y Analytics**
 Data Architecture · Analytics Engineering · SQL Server · Power BI
 
-[Ver el CV en el sitio](https://martiniurato.github.io/cv-site/) · [CV completo en PDF](cv-base-es.pdf) · [CV de una página en PDF](cv-short-es.pdf) · [LinkedIn](https://linkedin.com/in/martin-iurato) · [GitHub](https://github.com/MartinIurato)
+<img src="icons/site.svg" width="16" height="16" alt=""> [Ver el CV](https://martiniurato.github.io/cv-site/) · <img src="icons/linkedin.svg" width="16" height="16" alt=""> [LinkedIn](https://linkedin.com/in/martin-iurato) · <img src="icons/github.svg" width="16" height="16" alt=""> [GitHub](https://github.com/MartinIurato) · <img src="icons/instagram.svg" width="16" height="16" alt=""> [Instagram](https://instagram.com/martin_iurato)
 
 ## Cómo está hecho
 
-Este CV es código. Lo que sigue es el flujo completo, de la fuente a esta página.
+Este CV se genera desde código. Los datos se cargan una sola vez, en archivos YAML. Cada versión del CV elige y ordena esos datos, sin agregar ni cambiar nada. Del mismo origen salen el sitio, los PDF y este README, así que siempre dicen lo mismo.
 
-**La fuente es única.** Los hechos viven una sola vez, en archivos YAML: cada puesto con sus líneas de experiencia, sus tecnologías y sus categorías, más formación, idiomas y competencias. Nada se escribe dos veces, y ningún texto visible nace fuera de ahí.
-
-**Un validador corre antes de cada generación y corta el build si algo no cierra:** un término de competencias sin una línea de experiencia que lo respalde, un identificador repetido o inexistente, un texto sin traducir, una fecha con formato inválido, un caso de estudio referenciado que no existe. Si hay un error, no se genera nada.
-
-**Los perfiles seleccionan y ordenan.** Cada versión del CV —la completa, la de una página— es una lista explícita de qué entra y en qué orden, más opciones de presentación. Un perfil no puede agregar ni modificar un hecho: si algo tiene que aparecer, primero se carga en la fuente.
-
-**Las plantillas ponen la forma y nunca el contenido:** layout, tipografía y color. Cambiar de plantilla cambia cómo se ve el CV, jamás lo que dice.
-
-**Del mismo contexto salen las tres salidas:** el PDF, el HTML de pantalla y este Markdown. Por eso dicen exactamente lo mismo y no pueden desincronizarse.
-
-**La publicación es un paso más del build.** Un script genera la salida, la copia a este repositorio y deja los cambios a la vista para revisarlos antes del push.
-
-**Las decisiones se registran como ADR** —14 hasta hoy— con su contexto, sus consecuencias y las alternativas descartadas. Un ADR publicado no se edita: una decisión que se reemplaza se escribe de nuevo.
-
-**El build no llama a ninguna IA.** Es determinístico: el mismo dato produce siempre la misma salida.
-
-**Este repositorio es la salida, no el proyecto.** El código, la fuente en YAML, los perfiles y las decisiones viven en un repositorio privado. Acá llega solo lo que se publica, y no se edita a mano: un cambio hecho acá se pierde en la próxima publicación.
+Este repositorio tiene solo la versión publicada. El código y los datos están en un repositorio privado.
 
 ## Qué contiene
 
@@ -34,6 +18,7 @@ Este CV es código. Lo que sigue es el flujo completo, de la fuente a esta pági
 | `index.html` | El CV para pantalla |
 | `cv-base-es.pdf` | CV completo en PDF |
 | `cv-short-es.pdf` | CV de una página en PDF |
+| `icons/` | Íconos de los links de este README |
 | `.gitattributes` | Marca los PDF como binarios para que no se corrompan al clonarlos |
 | `.nojekyll` | Indica a GitHub Pages que sirva los archivos tal cual, sin procesarlos |
 
